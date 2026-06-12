@@ -3,891 +3,237 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shiva Kumar — Data Analytics Portfolio</title>
+<title>Bolloju Shiva Kumar — Data Analytics Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg:        #0D1B2A;
-    --card-bg:   #112236;
-    --card-hover:#142B44;
-    --border:    #1E3A5F;
-    --accent:    #00D4FF;
-    --accent2:   #0099CC;
-    --text:      #F0F4F8;
-    --muted:     #8899AA;
-    --tag-bg:    #1a3350;
-    --success:   #00E5A0;
-    --warning:   #FFB740;
-    --radius:    12px;
-    --radius-lg: 20px;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-    font-size: 15px;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
-
-  /* ── NOISE TEXTURE ── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.4;
-  }
-
-  /* ── NAV ── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 18px 48px;
-    background: rgba(13, 27, 42, 0.85);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(30, 58, 95, 0.6);
-  }
-
-  .nav-logo {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 18px;
-    color: var(--text);
-    letter-spacing: -0.3px;
-  }
-
-  .nav-logo span { color: var(--accent); }
-
-  .nav-links {
-    display: flex;
-    gap: 32px;
-    list-style: none;
-  }
-
-  .nav-links a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: var(--accent); }
-
-  .nav-cta {
-    background: var(--accent);
-    color: var(--bg) !important;
-    padding: 8px 18px;
-    border-radius: 6px;
-    font-weight: 600 !important;
-  }
-
-  .nav-cta:hover { background: #33DDFF; color: var(--bg) !important; }
-
-  /* ── HERO ── */
-  .hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 120px 48px 80px;
-    overflow: hidden;
-  }
-
-  .hero-grid-bg {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
-  }
-
-  .hero-glow {
-    position: absolute;
-    width: 600px; height: 600px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,212,255,0.1) 0%, transparent 70%);
-    top: -100px; right: -100px;
-    pointer-events: none;
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 1;
-    max-width: 720px;
-  }
-
-  .hero-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--accent);
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-bottom: 24px;
-  }
-
-  .hero-eyebrow::before {
-    content: '';
-    display: inline-block;
-    width: 24px; height: 1px;
-    background: var(--accent);
-  }
-
-  .hero h1 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(42px, 6vw, 72px);
-    font-weight: 700;
-    line-height: 1.05;
-    letter-spacing: -2px;
-    margin-bottom: 24px;
-  }
-
-  .hero h1 .accent { color: var(--accent); }
-
-  .hero-desc {
-    font-size: 17px;
-    color: var(--muted);
-    max-width: 520px;
-    line-height: 1.7;
-    margin-bottom: 40px;
-  }
-
-  .hero-stats {
-    display: flex;
-    gap: 40px;
-    margin-bottom: 40px;
-  }
-
-  .stat-item { border-left: 2px solid var(--accent); padding-left: 16px; }
-
-  .stat-value {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--text);
-    line-height: 1;
-  }
-
-  .stat-label {
-    font-size: 12px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-top: 4px;
-  }
-
-  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-
-  .btn-primary {
-    background: var(--accent);
-    color: var(--bg);
-    border: none;
-    padding: 14px 28px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-decoration: none;
-    display: inline-block;
-  }
-
-  .btn-primary:hover { background: #33DDFF; transform: translateY(-1px); }
-
-  .btn-ghost {
-    background: transparent;
-    color: var(--text);
-    border: 1px solid var(--border);
-    padding: 14px 28px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-decoration: none;
-    display: inline-block;
-  }
-
-  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
-
-  /* ── SECTION ── */
-  section {
-    position: relative;
-    z-index: 1;
-    padding: 80px 48px;
-    max-width: 1280px;
-    margin: 0 auto;
-  }
-
-  .section-header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin-bottom: 48px;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-
-  .section-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-  }
-
-  .section-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(28px, 4vw, 40px);
-    font-weight: 700;
-    letter-spacing: -1px;
-    line-height: 1.1;
-  }
-
-  /* ── FILTER TABS ── */
-  .filter-tabs {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 40px;
-  }
-
-  .filter-btn {
-    background: var(--card-bg);
-    color: var(--muted);
-    border: 1px solid var(--border);
-    padding: 8px 18px;
-    border-radius: 100px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .filter-btn:hover, .filter-btn.active {
-    background: rgba(0, 212, 255, 0.12);
-    color: var(--accent);
-    border-color: var(--accent);
-  }
-
-  /* ── PROJECT GRID ── */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-    gap: 24px;
-  }
-
-  /* ── PROJECT CARD ── */
-  .project-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    position: relative;
-  }
-
-  .project-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: var(--radius-lg);
-    background: linear-gradient(135deg, rgba(0,212,255,0.06) 0%, transparent 60%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-  }
-
-  .project-card:hover {
-    border-color: rgba(0, 212, 255, 0.5);
-    transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 212, 255, 0.08);
-  }
-
-  .project-card:hover::before { opacity: 1; }
-
-  /* ── EMBED PREVIEW ── */
-  .embed-preview {
-    position: relative;
-    width: 100%;
-    height: 220px;
-    background: #0A1622;
-    overflow: hidden;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .embed-preview iframe {
-    width: 100%; height: 100%;
-    border: none;
-    pointer-events: none;
-    transform: scale(1);
-    transform-origin: top left;
-  }
-
-  .embed-placeholder {
-    width: 100%; height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    background: linear-gradient(135deg, #0A1622 0%, #0f2035 100%);
-  }
-
-  .embed-placeholder-icon {
-    width: 56px; height: 56px;
-    background: rgba(0,212,255,0.1);
-    border: 1px solid rgba(0,212,255,0.3);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-  }
-
-  .embed-placeholder-text {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    text-align: center;
-  }
-
-  .embed-badge {
-    position: absolute;
-    top: 12px; right: 12px;
-    background: rgba(0, 212, 255, 0.15);
-    border: 1px solid rgba(0, 212, 255, 0.4);
-    color: var(--accent);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    padding: 4px 10px;
-    border-radius: 100px;
-    letter-spacing: 0.5px;
-  }
-
-  /* ── CARD BODY ── */
-  .card-body { padding: 24px; }
-
-  .card-domain {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 8px;
-  }
-
-  .card-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 19px;
-    font-weight: 600;
-    line-height: 1.3;
-    margin-bottom: 10px;
-    letter-spacing: -0.3px;
-  }
-
-  .card-desc {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.6;
-    margin-bottom: 18px;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .card-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 18px;
-  }
-
-  .tag {
-    background: var(--tag-bg);
-    color: var(--muted);
-    font-size: 11px;
-    font-weight: 500;
-    padding: 4px 10px;
-    border-radius: 4px;
-    letter-spacing: 0.3px;
-  }
-
-  .card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 16px;
-    border-top: 1px solid var(--border);
-  }
-
-  .card-meta {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    color: var(--muted);
-  }
-
-  .card-actions { display: flex; gap: 8px; }
-
-  .btn-sm {
-    padding: 7px 14px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    transition: all 0.2s;
-    text-decoration: none;
-    display: inline-block;
-  }
-
-  .btn-sm-primary { background: var(--accent); color: var(--bg); }
-  .btn-sm-primary:hover { background: #33DDFF; }
-
-  .btn-sm-ghost {
-    background: transparent;
-    color: var(--muted);
-    border: 1px solid var(--border);
-  }
-
-  .btn-sm-ghost:hover { color: var(--accent); border-color: var(--accent); }
-
-  /* ── MODAL ── */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(7, 14, 22, 0.92);
-    backdrop-filter: blur(8px);
-    z-index: 200;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s;
-  }
-
-  .modal-overlay.active { opacity: 1; pointer-events: all; }
-
-  .modal {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    width: 100%;
-    max-width: 900px;
-    max-height: 90vh;
-    overflow-y: auto;
-    transform: translateY(24px);
-    transition: transform 0.3s;
-    position: relative;
-  }
-
-  .modal-overlay.active .modal { transform: translateY(0); }
-
-  .modal-close {
-    position: absolute;
-    top: 20px; right: 20px;
-    width: 36px; height: 36px;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--muted);
-    font-size: 18px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    transition: all 0.2s;
-  }
-
-  .modal-close:hover { color: var(--text); border-color: var(--accent); }
-
-  .modal-embed {
-    width: 100%;
-    height: 420px;
-    background: #0A1622;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .modal-embed iframe {
-    width: 100%; height: 100%;
-    border: none;
-  }
-
-  .modal-embed-placeholder {
-    width: 100%; height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    padding: 40px;
-    text-align: center;
-  }
-
-  .embed-url-form {
-    width: 100%;
-    max-width: 500px;
-  }
-
-  .embed-url-form label {
-    display: block;
-    font-size: 13px;
-    color: var(--muted);
-    margin-bottom: 8px;
-  }
-
-  .embed-url-form input {
-    width: 100%;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    font-size: 13px;
-    padding: 10px 14px;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
-  .embed-url-form input:focus { border-color: var(--accent); }
-
-  .modal-content { padding: 32px; }
-
-  .modal-domain {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 10px;
-  }
-
-  .modal-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    margin-bottom: 16px;
-    line-height: 1.2;
-  }
-
-  .modal-desc {
-    color: var(--muted);
-    font-size: 15px;
-    line-height: 1.7;
-    margin-bottom: 28px;
-  }
-
-  .insights-section { margin-bottom: 28px; }
-
-  .insights-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    color: var(--accent);
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .insight-item {
-    display: flex;
-    gap: 12px;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(30, 58, 95, 0.5);
-  }
-
-  .insight-item:last-child { border-bottom: none; }
-
-  .insight-bullet {
-    width: 6px; height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
-    margin-top: 8px;
-    flex-shrink: 0;
-  }
-
-  .insight-text { font-size: 14px; color: var(--muted); line-height: 1.6; }
-
-  .insight-text strong { color: var(--text); font-weight: 500; }
-
-  .kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 12px;
-    margin-bottom: 28px;
-  }
-
-  .kpi-card {
-    background: rgba(0,212,255,0.05);
-    border: 1px solid rgba(0,212,255,0.2);
-    border-radius: 10px;
-    padding: 16px;
-    text-align: center;
-  }
-
-  .kpi-value {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--accent);
-    margin-bottom: 4px;
-  }
-
-  .kpi-label {
-    font-size: 11px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .modal-footer {
-    display: flex;
-    gap: 12px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    flex-wrap: wrap;
-  }
-
-  /* ── ADD PROJECT FORM ── */
-  .add-section {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 40px;
-    margin-top: 40px;
-  }
-
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .form-group.full { grid-column: 1 / -1; }
-
-  .form-group label {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .form-group input,
-  .form-group textarea,
-  .form-group select {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    font-size: 14px;
-    padding: 12px 16px;
-    outline: none;
-    transition: border-color 0.2s;
-    font-family: 'Inter', sans-serif;
-  }
-
-  .form-group input:focus,
-  .form-group textarea:focus,
-  .form-group select:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(0,212,255,0.08);
-  }
-
-  .form-group textarea { resize: vertical; min-height: 100px; }
-
-  .form-group select option { background: var(--card-bg); }
-
-  .insights-input-list { display: flex; flex-direction: column; gap: 8px; }
-
-  .insight-input-row { display: flex; gap: 8px; }
-
-  .insight-input-row input { flex: 1; }
-
-  .btn-remove-insight {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    border-radius: 6px;
-    padding: 0 12px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: all 0.2s;
-  }
-
-  .btn-remove-insight:hover { border-color: #ff5555; color: #ff5555; }
-
-  .btn-add-insight {
-    background: transparent;
-    border: 1px dashed var(--border);
-    color: var(--muted);
-    border-radius: 8px;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 13px;
-    transition: all 0.2s;
-    margin-top: 4px;
-  }
-
-  .btn-add-insight:hover { border-color: var(--accent); color: var(--accent); }
-
-  .kpi-input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-
-  .kpi-input-pair { display: flex; gap: 8px; }
-  .kpi-input-pair input:first-child { width: 80px; flex-shrink: 0; }
-
-  .form-actions {
-    display: flex;
-    gap: 12px;
-    justify-content: flex-end;
-    margin-top: 28px;
-  }
-
-  /* ── ABOUT ── */
-  .about-section {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 48px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: center;
-  }
-
-  .about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 16px; }
-  .about-text p:last-child { margin-bottom: 0; }
-
-  .skills-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-
-  .skill-chip {
-    background: var(--tag-bg);
-    border: 1px solid var(--border);
-    color: var(--text);
-    font-size: 12px;
-    padding: 6px 14px;
-    border-radius: 100px;
-    font-weight: 500;
-  }
-
-  .skill-chip.primary {
-    background: rgba(0,212,255,0.1);
-    border-color: rgba(0,212,255,0.3);
-    color: var(--accent);
-  }
-
-  /* ── EMPTY STATE ── */
-  .empty-state {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 80px 40px;
-    color: var(--muted);
-  }
-
-  .empty-state-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.5; }
-  .empty-state h3 { font-family: 'Space Grotesk', sans-serif; font-size: 20px; color: var(--text); margin-bottom: 8px; }
-
-  /* ── TOAST ── */
-  .toast {
-    position: fixed;
-    bottom: 32px; right: 32px;
-    background: var(--card-bg);
-    border: 1px solid var(--accent);
-    color: var(--text);
-    padding: 14px 20px;
-    border-radius: 10px;
-    font-size: 14px;
-    z-index: 300;
-    transform: translateY(20px);
-    opacity: 0;
-    transition: all 0.3s;
-    max-width: 320px;
-  }
-
-  .toast.show { transform: translateY(0); opacity: 1; }
-
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 32px 48px;
-    text-align: center;
-    color: var(--muted);
-    font-size: 13px;
-  }
-
-  footer span { color: var(--accent); }
-
-  /* ── SCROLLBAR ── */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: var(--accent2); }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    nav { padding: 16px 20px; }
-    .nav-links { display: none; }
-    .hero { padding: 100px 20px 60px; }
-    .hero-stats { gap: 24px; flex-wrap: wrap; }
-    section { padding: 60px 20px; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .form-grid { grid-template-columns: 1fr; }
-    .about-section { grid-template-columns: 1fr; gap: 28px; padding: 28px; }
-    footer { padding: 24px 20px; }
-  }
-
-  /* ── PULSE ANIMATION ── */
-  @keyframes pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(0,212,255,0.3); }
-    50% { box-shadow: 0 0 0 8px rgba(0,212,255,0); }
-  }
-
-  .pulsing { animation: pulse 2s infinite; }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .card-animate {
-    animation: fadeIn 0.4s ease forwards;
+    --bg:#0D1B2A; --card-bg:#112236; --border:#1E3A5F;
+    --accent:#00D4FF; --accent2:#0099CC; --text:#F0F4F8;
+    --muted:#8899AA; --tag-bg:#1a3350; --success:#00E5A0;
+    --radius:12px; --radius-lg:20px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;min-height:100vh}
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.4}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 48px;background:rgba(13,27,42,.85);backdrop-filter:blur(16px);border-bottom:1px solid rgba(30,58,95,.6)}
+  .nav-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;color:var(--text);letter-spacing:-.3px}
+  .nav-logo span{color:var(--accent)}
+  .nav-links{display:flex;gap:32px;list-style:none;align-items:center}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;transition:color .2s}
+  .nav-links a:hover{color:var(--accent)}
+  .nav-cta{background:var(--accent);color:var(--bg)!important;padding:8px 18px;border-radius:6px;font-weight:600!important}
+  .nav-cta:hover{background:#33DDFF}
+
+  /* ADMIN BADGE in nav */
+  #adminBadge{display:none;align-items:center;gap:8px;background:rgba(0,212,255,.12);border:1px solid rgba(0,212,255,.4);color:var(--accent);font-size:12px;font-weight:600;padding:6px 14px;border-radius:100px;letter-spacing:.5px}
+  #adminBadge .dot{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:blink 1.5s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+  /* ADMIN LOGIN MODAL */
+  .auth-overlay{position:fixed;inset:0;background:rgba(7,14,22,.95);backdrop-filter:blur(12px);z-index:500;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .3s}
+  .auth-overlay.active{opacity:1;pointer-events:all}
+  .auth-box{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:48px 40px;width:100%;max-width:420px;position:relative}
+  .auth-close{position:absolute;top:16px;right:16px;background:transparent;border:1px solid var(--border);color:var(--muted);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+  .auth-close:hover{color:var(--text);border-color:var(--accent)}
+  .auth-icon{width:56px;height:56px;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.3);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:24px}
+  .auth-title{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;margin-bottom:6px;letter-spacing:-.3px}
+  .auth-sub{font-size:13px;color:var(--muted);margin-bottom:28px}
+  .auth-field{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+  .auth-field label{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+  .auth-field input{background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;padding:12px 16px;outline:none;transition:border-color .2s;font-family:'Inter',sans-serif;width:100%}
+  .auth-field input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,212,255,.08)}
+  .auth-error{color:#ff6b6b;font-size:13px;display:none;margin-bottom:12px}
+  .auth-error.show{display:block}
+  .auth-hint{font-size:11px;color:var(--muted);text-align:center;margin-top:16px;line-height:1.6}
+
+  /* HERO */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:120px 48px 80px;overflow:hidden}
+  .hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%)}
+  .hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,.1) 0%,transparent 70%);top:-100px;right:-100px;pointer-events:none}
+  .hero-content{position:relative;z-index:1;max-width:720px}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:24px}
+  .hero-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--accent)}
+  .hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(42px,6vw,72px);font-weight:700;line-height:1.05;letter-spacing:-2px;margin-bottom:24px}
+  .hero h1 .accent{color:var(--accent)}
+  .hero-desc{font-size:17px;color:var(--muted);max-width:520px;line-height:1.7;margin-bottom:40px}
+  .hero-stats{display:flex;gap:40px;margin-bottom:40px}
+  .stat-item{border-left:2px solid var(--accent);padding-left:16px}
+  .stat-value{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:var(--text);line-height:1}
+  .stat-label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap}
+
+  /* BUTTONS */
+  .btn-primary{background:var(--accent);color:var(--bg);border:none;padding:14px 28px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+  .btn-primary:hover{background:#33DDFF;transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border);padding:14px 28px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+  .btn-sm{padding:7px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:none;transition:all .2s;text-decoration:none;display:inline-block}
+  .btn-sm-primary{background:var(--accent);color:var(--bg)}
+  .btn-sm-primary:hover{background:#33DDFF}
+  .btn-sm-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}
+  .btn-sm-ghost:hover{color:var(--accent);border-color:var(--accent)}
+  .btn-sm-danger{background:transparent;color:#ff6b6b;border:1px solid rgba(255,107,107,.3)}
+  .btn-sm-danger:hover{background:rgba(255,107,107,.1);border-color:#ff6b6b}
+
+  /* SECTION */
+  section{position:relative;z-index:1;padding:80px 48px;max-width:1280px;margin:0 auto}
+  .section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;flex-wrap:wrap;gap:16px}
+  .section-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px}
+  .section-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-1px;line-height:1.1}
+
+  /* FILTER */
+  .filter-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px}
+  .filter-btn{background:var(--card-bg);color:var(--muted);border:1px solid var(--border);padding:8px 18px;border-radius:100px;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s}
+  .filter-btn:hover,.filter-btn.active{background:rgba(0,212,255,.12);color:var(--accent);border-color:var(--accent)}
+
+  /* ADMIN-ONLY section */
+  #addSection{display:none}
+  body.is-admin #addSection{display:block}
+
+  /* GRID */
+  .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:24px}
+
+  /* CARD */
+  .project-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s ease;cursor:pointer;position:relative}
+  .project-card::before{content:'';position:absolute;inset:0;border-radius:var(--radius-lg);background:linear-gradient(135deg,rgba(0,212,255,.06) 0%,transparent 60%);opacity:0;transition:opacity .3s;pointer-events:none}
+  .project-card:hover{border-color:rgba(0,212,255,.5);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.4),0 0 30px rgba(0,212,255,.08)}
+  .project-card:hover::before{opacity:1}
+
+  /* EMBED PREVIEW */
+  .embed-preview{position:relative;width:100%;height:220px;background:#0A1622;overflow:hidden;border-bottom:1px solid var(--border)}
+  .embed-preview iframe{width:100%;height:100%;border:none;pointer-events:none}
+  .embed-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,#0A1622 0%,#0f2035 100%)}
+  .embed-placeholder-icon{width:56px;height:56px;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.3);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px}
+  .embed-placeholder-text{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-align:center}
+  .embed-badge{position:absolute;top:12px;right:12px;background:rgba(0,212,255,.15);border:1px solid rgba(0,212,255,.4);color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 10px;border-radius:100px;letter-spacing:.5px}
+
+  /* CARD BODY */
+  .card-body{padding:24px}
+  .card-domain{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px}
+  .card-title{font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:600;line-height:1.3;margin-bottom:10px;letter-spacing:-.3px}
+  .card-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:18px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .card-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+  .tag{background:var(--tag-bg);color:var(--muted);font-size:11px;font-weight:500;padding:4px 10px;border-radius:4px;letter-spacing:.3px}
+  .card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid var(--border)}
+  .card-meta{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+  .card-actions{display:flex;gap:8px}
+
+  /* Admin-only card controls hidden by default */
+  .admin-only{display:none}
+  body.is-admin .admin-only{display:inline-block}
+
+  /* MODAL */
+  .modal-overlay{position:fixed;inset:0;background:rgba(7,14,22,.92);backdrop-filter:blur(8px);z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .3s}
+  .modal-overlay.active{opacity:1;pointer-events:all}
+  .modal{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);width:100%;max-width:900px;max-height:90vh;overflow-y:auto;transform:translateY(24px);transition:transform .3s;position:relative}
+  .modal-overlay.active .modal{transform:translateY(0)}
+  .modal-close{position:absolute;top:20px;right:20px;width:36px;height:36px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--muted);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;transition:all .2s}
+  .modal-close:hover{color:var(--text);border-color:var(--accent)}
+  .modal-embed{width:100%;height:420px;background:#0A1622;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center;border-radius:var(--radius-lg) var(--radius-lg) 0 0;overflow:hidden;position:relative}
+  .modal-embed iframe{width:100%;height:100%;border:none}
+  .modal-embed-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:40px;text-align:center}
+  .embed-url-form{width:100%;max-width:500px}
+  .embed-url-form label{display:block;font-size:13px;color:var(--muted);margin-bottom:8px}
+  .embed-url-form input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;padding:10px 14px;outline:none;transition:border-color .2s}
+  .embed-url-form input:focus{border-color:var(--accent)}
+  .modal-content{padding:32px}
+  .modal-domain{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px}
+  .modal-title{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;letter-spacing:-.5px;margin-bottom:16px;line-height:1.2}
+  .modal-desc{color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:28px}
+
+  .insights-section{margin-bottom:28px}
+  .insights-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;color:var(--accent);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .insight-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid rgba(30,58,95,.5)}
+  .insight-item:last-child{border-bottom:none}
+  .insight-bullet{width:6px;height:6px;background:var(--accent);border-radius:50%;margin-top:8px;flex-shrink:0}
+  .insight-text{font-size:14px;color:var(--muted);line-height:1.6}
+  .insight-text strong{color:var(--text);font-weight:500}
+
+  .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:28px}
+  .kpi-card{background:rgba(0,212,255,.05);border:1px solid rgba(0,212,255,.2);border-radius:10px;padding:16px;text-align:center}
+  .kpi-value{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:var(--accent);margin-bottom:4px}
+  .kpi-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+  .modal-footer{display:flex;gap:12px;padding-top:20px;border-top:1px solid var(--border);flex-wrap:wrap}
+
+  /* ADD FORM */
+  .add-section{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px;margin-top:40px}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .form-group{display:flex;flex-direction:column;gap:8px}
+  .form-group.full{grid-column:1/-1}
+  .form-group label{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+  .form-group input,.form-group textarea,.form-group select{background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;padding:12px 16px;outline:none;transition:border-color .2s;font-family:'Inter',sans-serif}
+  .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,212,255,.08)}
+  .form-group textarea{resize:vertical;min-height:100px}
+  .insights-input-list{display:flex;flex-direction:column;gap:8px}
+  .insight-input-row{display:flex;gap:8px}
+  .insight-input-row input{flex:1}
+  .btn-remove-insight{background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:6px;padding:0 12px;cursor:pointer;font-size:16px;transition:all .2s}
+  .btn-remove-insight:hover{border-color:#ff5555;color:#ff5555}
+  .btn-add-insight{background:transparent;border:1px dashed var(--border);color:var(--muted);border-radius:8px;padding:10px;cursor:pointer;font-size:13px;transition:all .2s;margin-top:4px}
+  .btn-add-insight:hover{border-color:var(--accent);color:var(--accent)}
+  .kpi-input-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .kpi-input-pair{display:flex;gap:8px}
+  .kpi-input-pair input:first-child{width:80px;flex-shrink:0}
+  .form-actions{display:flex;gap:12px;justify-content:flex-end;margin-top:28px}
+
+  /* ABOUT */
+  .about-section{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .about-text p{color:var(--muted);line-height:1.8;margin-bottom:16px}
+  .about-text p:last-child{margin-bottom:0}
+  .skills-grid{display:flex;flex-wrap:wrap;gap:8px}
+  .skill-chip{background:var(--tag-bg);border:1px solid var(--border);color:var(--text);font-size:12px;padding:6px 14px;border-radius:100px;font-weight:500}
+  .skill-chip.primary{background:rgba(0,212,255,.1);border-color:rgba(0,212,255,.3);color:var(--accent)}
+
+  /* EMPTY */
+  .empty-state{grid-column:1/-1;text-align:center;padding:80px 40px;color:var(--muted)}
+  .empty-state-icon{font-size:48px;margin-bottom:16px;opacity:.5}
+  .empty-state h3{font-family:'Space Grotesk',sans-serif;font-size:20px;color:var(--text);margin-bottom:8px}
+
+  /* TOAST */
+  .toast{position:fixed;bottom:32px;right:32px;background:var(--card-bg);border:1px solid var(--accent);color:var(--text);padding:14px 20px;border-radius:10px;font-size:14px;z-index:300;transform:translateY(20px);opacity:0;transition:all .3s;max-width:320px}
+  .toast.show{transform:translateY(0);opacity:1}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--border);padding:32px 48px;text-align:center;color:var(--muted);font-size:13px}
+  footer span{color:var(--accent)}
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar{width:6px}
+  ::-webkit-scrollbar-track{background:var(--bg)}
+  ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+  ::-webkit-scrollbar-thumb:hover{background:var(--accent2)}
+
+  @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+  .card-animate{animation:fadeIn .4s ease forwards}
+
+  /* RESUME BUTTON */
+  .btn-resume{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--success);border:1px solid var(--success);padding:14px 24px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none}
+  .btn-resume:hover{background:rgba(0,229,160,.1);transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,229,160,.15)}
+  .btn-resume svg{flex-shrink:0}
+  .nav-resume{display:inline-flex;align-items:center;gap:6px;color:var(--success)!important;border:1px solid rgba(0,229,160,.4);padding:6px 14px;border-radius:6px;font-size:12px!important;font-weight:600!important;transition:all .2s}
+  .nav-resume:hover{background:rgba(0,229,160,.1)!important;border-color:var(--success)!important}
+
+  /* RESUME UPLOAD (admin) */
+  .resume-upload-zone{border:2px dashed var(--border);border-radius:12px;padding:28px;text-align:center;cursor:pointer;transition:all .2s;margin-top:16px}
+  .resume-upload-zone:hover,.resume-upload-zone.drag-over{border-color:var(--accent);background:rgba(0,212,255,.04)}
+  .resume-upload-zone input[type=file]{display:none}
+  .resume-status{display:flex;align-items:center;gap:10px;margin-top:14px;padding:12px 16px;background:rgba(0,229,160,.06);border:1px solid rgba(0,229,160,.25);border-radius:8px;font-size:13px;color:var(--success)}
+  .resume-status.hidden{display:none}
+
+  @media(max-width:768px){
+    nav{padding:16px 20px}
+    .nav-links{display:none}
+    .hero{padding:100px 20px 60px}
+    .hero-stats{gap:24px;flex-wrap:wrap}
+    section{padding:60px 20px}
+    .projects-grid{grid-template-columns:1fr}
+    .form-grid{grid-template-columns:1fr}
+    .about-section{grid-template-columns:1fr;gap:28px;padding:28px}
+    footer{padding:24px 20px}
   }
 </style>
 </head>
@@ -899,8 +245,18 @@
   <ul class="nav-links">
     <li><a href="#projects">Projects</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#add">Add Project</a></li>
+    <li id="addNavLink" style="display:none"><a href="#add">Add Project</a></li>
+    <li><a id="navResumeBtn" href="#" onclick="downloadResume(event)" class="nav-resume">↓ Resume</a></li>
     <li><a href="mailto:shiva@email.com" class="nav-cta">Contact</a></li>
+    <li id="adminBadge"><span class="dot"></span> Admin</li>
+    <li>
+      <button id="adminToggleBtn" onclick="openAuthModal()"
+        style="background:transparent;border:1px solid var(--border);color:var(--muted);padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;letter-spacing:.5px;text-transform:uppercase;transition:all .2s"
+        onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'"
+        onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">
+        🔐 Admin
+      </button>
+    </li>
   </ul>
 </nav>
 
@@ -911,26 +267,19 @@
   <div class="hero-content">
     <div class="hero-eyebrow">Power BI Developer · Data Analyst</div>
     <h1>Turning data<br>into <span class="accent">decisions.</span></h1>
-    <p class="hero-desc">
-      3.7 years of insurance analytics expertise. Building Power BI solutions that cut reporting time by 80% and drive real business outcomes.
-    </p>
+    <p class="hero-desc">3.7 years of insurance analytics expertise. Building Power BI solutions that cut reporting time by 80% and drive real business outcomes.</p>
     <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-value" id="projectCount">0</div>
-        <div class="stat-label">Projects</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-value">3.7</div>
-        <div class="stat-label">Years Exp.</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-value">80%</div>
-        <div class="stat-label">Time Saved</div>
-      </div>
+      <div class="stat-item"><div class="stat-value" id="projectCount">0</div><div class="stat-label">Projects</div></div>
+      <div class="stat-item"><div class="stat-value">3.7</div><div class="stat-label">Years Exp.</div></div>
+      <div class="stat-item"><div class="stat-value">80%</div><div class="stat-label">Time Saved</div></div>
     </div>
     <div class="hero-actions">
       <a href="#projects" class="btn-primary">View Projects</a>
-      <a href="#add" class="btn-ghost">+ Add Project</a>
+      <a href="#about" class="btn-ghost">About Me</a>
+      <a href="#" onclick="downloadResume(event)" class="btn-resume">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Resume
+      </a>
     </div>
   </div>
 </div>
@@ -943,136 +292,87 @@
       <div class="section-title">Power BI Reports</div>
     </div>
   </div>
-
   <div class="filter-tabs" id="filterTabs">
     <button class="filter-btn active" data-filter="all">All Projects</button>
-    <button class="filter-btn" data-filter="Insurance">Insurance</button>
-    <button class="filter-btn" data-filter="Claims">Claims</button>
-    <button class="filter-btn" data-filter="Finance">Finance</button>
-    <button class="filter-btn" data-filter="HR">HR Analytics</button>
   </div>
-
-  <div class="projects-grid" id="projectsGrid">
-    <!-- populated by JS -->
-  </div>
+  <div class="projects-grid" id="projectsGrid"></div>
 </section>
 
 <!-- ABOUT -->
-<section id="about" style="padding-top: 0;">
+<section id="about" style="padding-top:0">
   <div class="about-section">
     <div class="about-text">
-      <div class="section-label" style="margin-bottom: 12px;">// About</div>
-      <div class="section-title" style="margin-bottom: 20px;">Shiva Kumar</div>
+      <div class="section-label" style="margin-bottom:12px">// About</div>
+      <div class="section-title" style="margin-bottom:20px">Bolloju Shiva Kumar</div>
       <p>Power BI Developer at Wipro, Hyderabad, with deep expertise in insurance analytics. I specialize in translating complex actuarial and operational data into dashboards that empower business decisions.</p>
       <p>My work spans the full analytics lifecycle — from Oracle/SQL data modeling to DAX-heavy Power BI solutions with Star Schema architecture and automated report delivery.</p>
+      <!-- Admin: resume upload -->
+      <div id="resumeAdminPanel" style="display:none;margin-top:20px">
+        <p style="font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Resume File (Admin)</p>
+        <div class="resume-upload-zone" id="uploadZone" onclick="document.getElementById('resumeFileInput').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+          <input type="file" id="resumeFileInput" accept=".pdf,.doc,.docx" onchange="handleResumeUpload(this.files[0])">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.5" style="margin-bottom:8px"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <p style="color:var(--muted);font-size:13px">Click or drag your resume here</p>
+          <p style="color:var(--muted);font-size:11px;margin-top:4px">PDF, DOC, DOCX supported</p>
+        </div>
+        <div class="resume-status hidden" id="resumeStatus">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <span id="resumeStatusText">Resume uploaded</span>
+          <button onclick="clearResume()" style="margin-left:auto;background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:12px;text-decoration:underline">Remove</button>
+        </div>
+      </div>
     </div>
     <div>
-      <p style="font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 14px; font-weight: 600;">Core Skills</p>
+      <p style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:14px;font-weight:600">Core Skills</p>
       <div class="skills-grid">
-        <span class="skill-chip primary">Power BI</span>
-        <span class="skill-chip primary">DAX</span>
-        <span class="skill-chip primary">Power Query</span>
-        <span class="skill-chip">SQL / PL-SQL</span>
-        <span class="skill-chip">Oracle</span>
-        <span class="skill-chip">MySQL</span>
-        <span class="skill-chip">Python</span>
-        <span class="skill-chip">Star Schema</span>
-        <span class="skill-chip">Snowflake Schema</span>
-        <span class="skill-chip">Insurance Analytics</span>
-        <span class="skill-chip">ETL</span>
-        <span class="skill-chip">Time Intelligence</span>
+        <span class="skill-chip primary">Power BI</span><span class="skill-chip primary">DAX</span><span class="skill-chip primary">Power Query</span>
+        <span class="skill-chip primary">SQL / PL-SQL</span><span class="skill-chip">Oracle</span><span class="skill-chip">MySQL</span>
+        <span class="skill-chip">Python</span><span class="skill-chip">Star Schema</span><span class="skill-chip">Snowflake Schema</span>
+        <span class="skill-chip">Insurance Analytics</span><span class="skill-chip">ETL</span><span class="skill-chip">Time Intelligence</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ADD PROJECT FORM -->
-<section id="add" style="padding-top: 0;">
+<!-- ADD PROJECT (admin only via CSS) -->
+<section id="addSection" style="padding-top:0">
   <div class="section-header">
-    <div>
-      <div class="section-label">// New Entry</div>
-      <div class="section-title">Add a Project</div>
-    </div>
+    <div><div class="section-label">// New Entry</div><div class="section-title">Add a Project</div></div>
   </div>
-
   <div class="add-section">
     <div class="form-grid">
-      <div class="form-group">
-        <label>Project Title *</label>
-        <input type="text" id="f-title" placeholder="e.g. Claims Loss Ratio Dashboard">
-      </div>
-      <div class="form-group">
-        <label>Domain / Category *</label>
-        <input type="text" id="f-domain" placeholder="e.g. Insurance · Claims · Finance">
-      </div>
-      <div class="form-group full">
-        <label>Short Description *</label>
-        <textarea id="f-desc" placeholder="Brief overview of the report purpose, data sources, and what problems it solves..."></textarea>
-      </div>
-      <div class="form-group full">
-        <label>Power BI Embed URL</label>
-        <input type="url" id="f-embed" placeholder="https://app.powerbi.com/reportEmbed?reportId=...">
-      </div>
-      <div class="form-group">
-        <label>Tools Used</label>
-        <input type="text" id="f-tools" placeholder="Power BI, DAX, Oracle SQL, Python">
-      </div>
-      <div class="form-group">
-        <label>Date / Period</label>
-        <input type="text" id="f-date" placeholder="e.g. Jan 2024 · Q1 FY24">
-      </div>
+      <div class="form-group"><label>Project Title *</label><input type="text" id="f-title" placeholder="e.g. Claims Loss Ratio Dashboard"></div>
+      <div class="form-group"><label>Domain / Category *</label><input type="text" id="f-domain" placeholder="e.g. Insurance · Claims · Finance"></div>
+      <div class="form-group full"><label>Short Description *</label><textarea id="f-desc" placeholder="Brief overview of the report purpose, data sources, and what problems it solves..."></textarea></div>
+      <div class="form-group full"><label>Power BI Embed URL</label><input type="url" id="f-embed" placeholder="https://app.powerbi.com/reportEmbed?reportId=..."></div>
+      <div class="form-group"><label>Tools Used</label><input type="text" id="f-tools" placeholder="Power BI, DAX, Oracle SQL, Python"></div>
+      <div class="form-group"><label>Date / Period</label><input type="text" id="f-date" placeholder="e.g. Jan 2024 · Q1 FY24"></div>
     </div>
-
-    <!-- KPIs -->
-    <div style="margin-top: 24px;">
-      <label style="display: block; font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">Key Metrics / KPIs (value + label)</label>
+    <div style="margin-top:24px">
+      <label style="display:block;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px">Key Metrics / KPIs</label>
       <div class="kpi-input-grid" id="kpiInputs">
-        <div class="kpi-input-pair">
-          <input type="text" placeholder="80%" class="kpi-val">
-          <input type="text" placeholder="Manual effort reduced" class="kpi-lab">
-        </div>
-        <div class="kpi-input-pair">
-          <input type="text" placeholder="40%" class="kpi-val">
-          <input type="text" placeholder="Load time improved" class="kpi-lab">
-        </div>
-        <div class="kpi-input-pair">
-          <input type="text" placeholder="" class="kpi-val">
-          <input type="text" placeholder="Metric label" class="kpi-lab">
-        </div>
-        <div class="kpi-input-pair">
-          <input type="text" placeholder="" class="kpi-val">
-          <input type="text" placeholder="Metric label" class="kpi-lab">
-        </div>
+        <div class="kpi-input-pair"><input type="text" placeholder="80%" class="kpi-val"><input type="text" placeholder="Manual effort reduced" class="kpi-lab"></div>
+        <div class="kpi-input-pair"><input type="text" placeholder="40%" class="kpi-val"><input type="text" placeholder="Load time improved" class="kpi-lab"></div>
+        <div class="kpi-input-pair"><input type="text" placeholder="" class="kpi-val"><input type="text" placeholder="Metric label" class="kpi-lab"></div>
+        <div class="kpi-input-pair"><input type="text" placeholder="" class="kpi-val"><input type="text" placeholder="Metric label" class="kpi-lab"></div>
       </div>
     </div>
-
-    <!-- Insights -->
-    <div style="margin-top: 24px;">
-      <label style="display: block; font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">Analysis & Insights</label>
+    <div style="margin-top:24px">
+      <label style="display:block;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px">Analysis & Insights</label>
       <div class="insights-input-list" id="insightsList">
-        <div class="insight-input-row">
-          <input type="text" placeholder="Key finding or business insight from the report...">
-          <button class="btn-remove-insight" onclick="removeInsight(this)">×</button>
-        </div>
-        <div class="insight-input-row">
-          <input type="text" placeholder="e.g. Claims spike 23% in Q3 driven by seasonal weather patterns">
-          <button class="btn-remove-insight" onclick="removeInsight(this)">×</button>
-        </div>
+        <div class="insight-input-row"><input type="text" placeholder="Key finding or business insight..."><button class="btn-remove-insight" onclick="removeInsight(this)">×</button></div>
+        <div class="insight-input-row"><input type="text" placeholder="e.g. Claims spike 23% in Q3 driven by seasonal weather patterns"><button class="btn-remove-insight" onclick="removeInsight(this)">×</button></div>
       </div>
       <button class="btn-add-insight" onclick="addInsightRow()">+ Add insight</button>
     </div>
-
     <div class="form-actions">
-      <button class="btn-ghost" onclick="clearForm()" style="padding: 12px 24px;">Clear</button>
-      <button class="btn-primary" onclick="addProject()" style="padding: 12px 28px;">Save Project</button>
+      <button class="btn-ghost" onclick="clearForm()" style="padding:12px 24px">Clear</button>
+      <button class="btn-primary" onclick="addProject()" style="padding:12px 28px">Save Project</button>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  Built with focus. Shiva Kumar · Power BI Developer · Hyderabad · <span>2025</span>
-</footer>
+<footer>Built with focus. Shiva Kumar · Power BI Developer · Hyderabad · <span>2026</span></footer>
 
 <!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay">
@@ -1083,11 +383,38 @@
   </div>
 </div>
 
+<!-- AUTH MODAL -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-box">
+    <button class="auth-close" onclick="closeAuthModal()">×</button>
+    <div id="authContent">
+      <!-- filled by JS based on state -->
+    </div>
+  </div>
+</div>
+
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
-// ── DATA STORE ──
+// ─────────────────────────────────────────────
+//  ADMIN PASSWORD — change this to your own!
+//  (hashed with SHA-256 so it's not plaintext)
+// ─────────────────────────────────────────────
+const ADMIN_PASS_HASH = "cd7eafd4d0d9afdb9748cbd50ba78ff3ac09312b498b93ca9a985ff37e5b094b";
+// This hash = "admin"  — CHANGE IT before deploying!
+// To generate your own hash: https://emn178.github.io/online-tools/sha256.html
+
+let isAdmin = false;
+
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+// ─────────────────────────────────────────────
+//  DATA
+// ─────────────────────────────────────────────
 let projects = JSON.parse(localStorage.getItem('shiva_portfolio_v2') || 'null') || [
   {
     id: 1,
@@ -1117,7 +444,7 @@ let projects = JSON.parse(localStorage.getItem('shiva_portfolio_v2') || 'null') 
     tools: ["Power BI", "DAX", "Power Query", "MySQL"],
     date: "Q4 FY2023",
     kpis: [
-      { value: "40%", label: "Report load time improvement" },
+      { value: "40%", label: "Report load time improved" },
       { value: "95%", label: "Data accuracy" },
       { value: "6", label: "Regions covered" }
     ],
@@ -1132,20 +459,106 @@ let projects = JSON.parse(localStorage.getItem('shiva_portfolio_v2') || 'null') 
 let activeFilter = 'all';
 let currentProject = null;
 
-// ── RENDER ──
+// ─────────────────────────────────────────────
+//  AUTH
+// ─────────────────────────────────────────────
+function openAuthModal() {
+  if (isAdmin) {
+    renderLogoutView();
+  } else {
+    renderLoginView();
+  }
+  document.getElementById('authOverlay').classList.add('active');
+}
+
+function closeAuthModal() {
+  document.getElementById('authOverlay').classList.remove('active');
+}
+
+function renderLoginView() {
+  document.getElementById('authContent').innerHTML = `
+    <div class="auth-icon">🔐</div>
+    <div class="auth-title">Admin Login</div>
+    <div class="auth-sub">Enter your password to unlock edit access</div>
+    <div class="auth-field">
+      <label>Password</label>
+      <input type="password" id="authPassInput" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <div class="auth-error" id="authError">Incorrect password. Try again.</div>
+    <button class="btn-primary" onclick="doLogin()" style="width:100%;padding:13px">Unlock Admin</button>
+    <div class="auth-hint">Only the portfolio owner has admin access.<br>Visitors can browse all projects without logging in.</div>
+  `;
+  setTimeout(() => document.getElementById('authPassInput')?.focus(), 100);
+}
+
+function renderLogoutView() {
+  document.getElementById('authContent').innerHTML = `
+    <div class="auth-icon">✅</div>
+    <div class="auth-title">Logged in as Admin</div>
+    <div class="auth-sub">You have full access to add, edit, and delete projects.</div>
+    <button class="btn-primary" onclick="doLogout()" style="width:100%;padding:13px;background:#ff6b6b;color:#fff">Log Out</button>
+    <div style="margin-top:16px">
+      <button class="btn-ghost" onclick="closeAuthModal()" style="width:100%;padding:12px">Cancel</button>
+    </div>
+  `;
+}
+
+async function doLogin() {
+  const input = document.getElementById('authPassInput').value;
+  const hash = await sha256(input);
+  if (hash === ADMIN_PASS_HASH) {
+    isAdmin = true;
+    applyAdminState();
+    closeAuthModal();
+    showToast('✓ Admin mode activated');
+    sessionStorage.setItem('shiva_admin', '1');
+  } else {
+    const err = document.getElementById('authError');
+    err.classList.add('show');
+    document.getElementById('authPassInput').value = '';
+    document.getElementById('authPassInput').focus();
+    setTimeout(() => err.classList.remove('show'), 3000);
+  }
+}
+
+function doLogout() {
+  isAdmin = false;
+  sessionStorage.removeItem('shiva_admin');
+  applyAdminState();
+  closeAuthModal();
+  showToast('Logged out');
+  renderProjects();
+}
+
+function applyAdminState() {
+  document.body.classList.toggle('is-admin', isAdmin);
+  document.getElementById('adminBadge').style.display = isAdmin ? 'flex' : 'none';
+  document.getElementById('addNavLink').style.display = isAdmin ? 'list-item' : 'none';
+  const btn = document.getElementById('adminToggleBtn');
+  btn.textContent = isAdmin ? '🔓 Admin' : '🔐 Admin';
+  toggleResumeAdminPanel();
+  renderProjects();
+}
+
+// Persist admin across soft refreshes within the session
+if (sessionStorage.getItem('shiva_admin') === '1') {
+  isAdmin = true;
+  applyAdminState();
+}
+
+// ─────────────────────────────────────────────
+//  FILTERS
+// ─────────────────────────────────────────────
 function getCategories() {
   const cats = new Set();
-  projects.forEach(p => {
-    p.domain.split('·').forEach(c => cats.add(c.trim()));
-  });
+  projects.forEach(p => p.domain.split('·').forEach(c => cats.add(c.trim())));
   return [...cats];
 }
 
 function buildFilters() {
   const container = document.getElementById('filterTabs');
-  const cats = getCategories();
   const existing = [...container.querySelectorAll('.filter-btn')].map(b => b.dataset.filter);
-  cats.forEach(cat => {
+  getCategories().forEach(cat => {
     if (!existing.includes(cat)) {
       const btn = document.createElement('button');
       btn.className = 'filter-btn';
@@ -1159,56 +572,48 @@ function buildFilters() {
 
 function setFilter(filter) {
   activeFilter = filter;
-  document.querySelectorAll('.filter-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.filter === filter);
-  });
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
   renderProjects();
 }
 
+// ─────────────────────────────────────────────
+//  RENDER
+// ─────────────────────────────────────────────
 function renderProjects() {
   const grid = document.getElementById('projectsGrid');
-  const filtered = activeFilter === 'all'
-    ? projects
-    : projects.filter(p => p.domain.includes(activeFilter));
-
+  const filtered = activeFilter === 'all' ? projects : projects.filter(p => p.domain.includes(activeFilter));
   document.getElementById('projectCount').textContent = projects.length;
 
   if (filtered.length === 0) {
     grid.innerHTML = `<div class="empty-state">
       <div class="empty-state-icon">📊</div>
       <h3>No projects here yet</h3>
-      <p>Add your first Power BI report using the form below</p>
+      <p>${isAdmin ? 'Use the form below to add your first project.' : 'Check back soon!'}</p>
     </div>`;
     return;
   }
 
   grid.innerHTML = filtered.map((p, i) => `
-    <div class="project-card card-animate" style="animation-delay: ${i * 0.07}s" onclick="openModal(${p.id})">
+    <div class="project-card card-animate" style="animation-delay:${i*.07}s" onclick="openModal(${p.id})">
       <div class="embed-preview">
         ${p.embedUrl
           ? `<iframe src="${p.embedUrl}" sandbox="allow-scripts allow-same-origin"></iframe>`
-          : `<div class="embed-placeholder">
-              <div class="embed-placeholder-icon">📊</div>
-              <div class="embed-placeholder-text">Click to view full report</div>
-            </div>`
-        }
+          : `<div class="embed-placeholder"><div class="embed-placeholder-icon">📊</div><div class="embed-placeholder-text">Click to view full report</div></div>`}
         <div class="embed-badge">Power BI</div>
       </div>
       <div class="card-body">
         <div class="card-domain">${p.domain}</div>
         <div class="card-title">${p.title}</div>
         <div class="card-desc">${p.desc}</div>
-        <div class="card-tags">
-          ${p.tools.map(t => `<span class="tag">${t}</span>`).join('')}
-        </div>
+        <div class="card-tags">${p.tools.map(t => `<span class="tag">${t}</span>`).join('')}</div>
         <div class="card-footer">
           <div class="card-meta">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             ${p.date}
           </div>
           <div class="card-actions">
-            <button class="btn-sm btn-sm-ghost" onclick="event.stopPropagation(); deleteProject(${p.id})">Delete</button>
-            <button class="btn-sm btn-sm-primary" onclick="event.stopPropagation(); openModal(${p.id})">View</button>
+            <button class="btn-sm btn-sm-danger admin-only" onclick="event.stopPropagation();deleteProject(${p.id})">Delete</button>
+            <button class="btn-sm btn-sm-primary" onclick="event.stopPropagation();openModal(${p.id})">View</button>
           </div>
         </div>
       </div>
@@ -1216,7 +621,9 @@ function renderProjects() {
   `).join('');
 }
 
-// ── MODAL ──
+// ─────────────────────────────────────────────
+//  MODAL
+// ─────────────────────────────────────────────
 function openModal(id) {
   currentProject = projects.find(p => p.id === id);
   if (!currentProject) return;
@@ -1224,56 +631,52 @@ function openModal(id) {
   const embedEl = document.getElementById('modalEmbed');
   if (currentProject.embedUrl) {
     embedEl.innerHTML = `<iframe src="${currentProject.embedUrl}" allowfullscreen sandbox="allow-scripts allow-same-origin allow-popups"></iframe>`;
+  } else if (isAdmin) {
+    embedEl.innerHTML = `
+      <div class="modal-embed-placeholder">
+        <div class="embed-placeholder-icon" style="width:64px;height:64px;font-size:28px">📊</div>
+        <p style="color:var(--muted);font-size:14px">No embed URL yet — add one below</p>
+        <div class="embed-url-form">
+          <label>Paste your Power BI embed link</label>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <input type="url" id="quickEmbedInput" placeholder="https://app.powerbi.com/reportEmbed?...">
+            <button class="btn-sm btn-sm-primary" onclick="saveEmbed(${id})" style="white-space:nowrap">Save & Load</button>
+          </div>
+        </div>
+      </div>`;
   } else {
     embedEl.innerHTML = `
       <div class="modal-embed-placeholder">
         <div class="embed-placeholder-icon" style="width:64px;height:64px;font-size:28px">📊</div>
-        <p style="color: var(--muted); font-size: 14px;">No embed URL added yet</p>
-        <div class="embed-url-form">
-          <label>Paste your Power BI embed link to display the report here</label>
-          <div style="display: flex; gap: 8px; margin-top: 8px;">
-            <input type="url" id="quickEmbedInput" placeholder="https://app.powerbi.com/reportEmbed?...">
-            <button class="btn-sm btn-sm-primary" onclick="saveEmbed(${id})" style="white-space: nowrap;">Save & Load</button>
-          </div>
-        </div>
+        <p style="color:var(--muted);font-size:14px">Report preview coming soon</p>
       </div>`;
   }
 
-  const kpisHtml = currentProject.kpis && currentProject.kpis.filter(k => k.value).length > 0
-    ? `<div class="kpi-grid">
-        ${currentProject.kpis.filter(k => k.value).map(k => `
-          <div class="kpi-card">
-            <div class="kpi-value">${k.value}</div>
-            <div class="kpi-label">${k.label}</div>
-          </div>`).join('')}
-      </div>` : '';
+  const kpisHtml = currentProject.kpis?.filter(k => k.value).length > 0
+    ? `<div class="kpi-grid">${currentProject.kpis.filter(k=>k.value).map(k=>`<div class="kpi-card"><div class="kpi-value">${k.value}</div><div class="kpi-label">${k.label}</div></div>`).join('')}</div>` : '';
 
-  const insightsHtml = currentProject.insights && currentProject.insights.length > 0
+  const insightsHtml = currentProject.insights?.length > 0
     ? `<div class="insights-section">
         <div class="insights-title">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
           Analysis & Insights
         </div>
-        ${currentProject.insights.map(ins => `
-          <div class="insight-item">
-            <div class="insight-bullet"></div>
-            <div class="insight-text">${ins}</div>
-          </div>`).join('')}
+        ${currentProject.insights.map(ins=>`<div class="insight-item"><div class="insight-bullet"></div><div class="insight-text">${ins}</div></div>`).join('')}
       </div>` : '';
+
+  const adminFooterBtns = isAdmin
+    ? `<button class="btn-sm btn-sm-danger admin-only" onclick="closeModal();deleteProject(${currentProject.id})">Delete Project</button>`
+    : '';
 
   document.getElementById('modalContent').innerHTML = `
     <div class="modal-domain">${currentProject.domain}</div>
     <div class="modal-title">${currentProject.title}</div>
     <div class="modal-desc">${currentProject.desc}</div>
-    ${kpisHtml}
-    ${insightsHtml}
-    <div class="card-tags" style="margin-bottom: 0;">
-      ${currentProject.tools.map(t => `<span class="tag">${t}</span>`).join('')}
-    </div>
+    ${kpisHtml}${insightsHtml}
+    <div class="card-tags" style="margin-bottom:0">${currentProject.tools.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
     <div class="modal-footer">
-      ${currentProject.embedUrl
-        ? `<a href="${currentProject.embedUrl}" target="_blank" rel="noopener" class="btn-primary btn-sm">Open in Power BI ↗</a>`
-        : ''}
+      ${currentProject.embedUrl ? `<a href="${currentProject.embedUrl}" target="_blank" rel="noopener" class="btn-primary btn-sm">Open in Power BI ↗</a>` : ''}
+      ${adminFooterBtns}
       <button class="btn-ghost btn-sm" onclick="closeModal()">Close</button>
     </div>`;
 
@@ -1285,12 +688,7 @@ function saveEmbed(id) {
   const url = document.getElementById('quickEmbedInput').value.trim();
   if (!url) return;
   const proj = projects.find(p => p.id === id);
-  if (proj) {
-    proj.embedUrl = url;
-    save();
-    openModal(id);
-    renderProjects();
-  }
+  if (proj) { proj.embedUrl = url; save(); openModal(id); renderProjects(); }
 }
 
 function closeModal() {
@@ -1299,11 +697,12 @@ function closeModal() {
   currentProject = null;
 }
 
-document.getElementById('modalOverlay').addEventListener('click', e => {
-  if (e.target === e.currentTarget) closeModal();
-});
+document.getElementById('modalOverlay').addEventListener('click', e => { if (e.target===e.currentTarget) closeModal(); });
+document.getElementById('authOverlay').addEventListener('click', e => { if (e.target===e.currentTarget) closeAuthModal(); });
 
-// ── ADD PROJECT ──
+// ─────────────────────────────────────────────
+//  ADD / DELETE (admin only)
+// ─────────────────────────────────────────────
 function addInsightRow() {
   const row = document.createElement('div');
   row.className = 'insight-input-row';
@@ -1317,72 +716,50 @@ function removeInsight(btn) {
 }
 
 function clearForm() {
-  ['f-title','f-domain','f-desc','f-embed','f-tools','f-date'].forEach(id => {
-    document.getElementById(id).value = '';
-  });
+  ['f-title','f-domain','f-desc','f-embed','f-tools','f-date'].forEach(id => document.getElementById(id).value = '');
   document.querySelectorAll('.kpi-val, .kpi-lab').forEach(i => i.value = '');
   document.querySelectorAll('#insightsList input').forEach(i => i.value = '');
 }
 
 function addProject() {
+  if (!isAdmin) { showToast('⚠ Admin access required'); return; }
   const title = document.getElementById('f-title').value.trim();
   const domain = document.getElementById('f-domain').value.trim();
   const desc = document.getElementById('f-desc').value.trim();
+  if (!title || !domain || !desc) { showToast('⚠ Fill in Title, Domain, and Description'); return; }
 
-  if (!title || !domain || !desc) {
-    showToast('⚠ Please fill in Title, Domain, and Description');
-    return;
-  }
-
-  const toolsRaw = document.getElementById('f-tools').value.trim();
-  const tools = toolsRaw ? toolsRaw.split(',').map(t => t.trim()).filter(Boolean) : ['Power BI'];
-
+  const tools = (document.getElementById('f-tools').value.trim() || 'Power BI').split(',').map(t=>t.trim()).filter(Boolean);
   const kpis = [];
   document.querySelectorAll('.kpi-input-pair').forEach(pair => {
     const val = pair.querySelector('.kpi-val').value.trim();
     const lab = pair.querySelector('.kpi-lab').value.trim();
     if (val && lab) kpis.push({ value: val, label: lab });
   });
+  const insights = [...document.querySelectorAll('#insightsList input')].map(i=>i.value.trim()).filter(Boolean);
 
-  const insights = [];
-  document.querySelectorAll('#insightsList input').forEach(input => {
-    const v = input.value.trim();
-    if (v) insights.push(v);
-  });
-
-  const proj = {
-    id: Date.now(),
-    title,
-    domain,
-    desc,
+  projects.unshift({
+    id: Date.now(), title, domain, desc,
     embedUrl: document.getElementById('f-embed').value.trim(),
-    tools,
-    date: document.getElementById('f-date').value.trim() || new Date().toLocaleDateString('en-IN', { month: 'short', year: 'numeric' }),
-    kpis,
-    insights
-  };
-
-  projects.unshift(proj);
-  save();
-  buildFilters();
-  renderProjects();
-  clearForm();
-  showToast('✓ Project saved successfully!');
+    tools, date: document.getElementById('f-date').value.trim() || new Date().toLocaleDateString('en-IN',{month:'short',year:'numeric'}),
+    kpis, insights
+  });
+  save(); buildFilters(); renderProjects(); clearForm();
+  showToast('✓ Project saved!');
   document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
 }
 
 function deleteProject(id) {
+  if (!isAdmin) return;
   if (!confirm('Delete this project?')) return;
   projects = projects.filter(p => p.id !== id);
-  save();
-  renderProjects();
+  save(); renderProjects();
   showToast('Project removed');
 }
 
-// ── UTIL ──
-function save() {
-  localStorage.setItem('shiva_portfolio_v2', JSON.stringify(projects));
-}
+// ─────────────────────────────────────────────
+//  UTILS
+// ─────────────────────────────────────────────
+function save() { localStorage.setItem('shiva_portfolio_v2', JSON.stringify(projects)); }
 
 function showToast(msg) {
   const t = document.getElementById('toast');
@@ -1391,12 +768,83 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 3000);
 }
 
-// ── FILTER EVENTS ──
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => setFilter(btn.dataset.filter));
-});
+document.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => setFilter(btn.dataset.filter)));
 
-// ── INIT ──
+// ─────────────────────────────────────────────
+//  RESUME
+// ─────────────────────────────────────────────
+// Resume stored as base64 in localStorage
+function getResume() {
+  try { return JSON.parse(localStorage.getItem('shiva_resume_v1') || 'null'); } catch { return null; }
+}
+
+function saveResumeData(name, base64, type) {
+  localStorage.setItem('shiva_resume_v1', JSON.stringify({ name, base64, type }));
+  updateResumeUI();
+}
+
+function clearResume() {
+  localStorage.removeItem('shiva_resume_v1');
+  updateResumeUI();
+  showToast('Resume removed');
+}
+
+function updateResumeUI() {
+  const r = getResume();
+  const status = document.getElementById('resumeStatus');
+  const statusText = document.getElementById('resumeStatusText');
+  if (r) {
+    status.classList.remove('hidden');
+    statusText.textContent = `✓ ${r.name} — ready to download`;
+  } else {
+    status.classList.add('hidden');
+  }
+}
+
+function handleResumeUpload(file) {
+  if (!file) return;
+  if (file.size > 5 * 1024 * 1024) { showToast('⚠ File too large (max 5 MB)'); return; }
+  const reader = new FileReader();
+  reader.onload = e => {
+    const base64 = e.target.result; // data:application/pdf;base64,...
+    saveResumeData(file.name, base64, file.type);
+    showToast('✓ Resume uploaded successfully!');
+  };
+  reader.readAsDataURL(file);
+}
+
+function handleDragOver(e) { e.preventDefault(); document.getElementById('uploadZone').classList.add('drag-over'); }
+function handleDragLeave(e) { document.getElementById('uploadZone').classList.remove('drag-over'); }
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('uploadZone').classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file) handleResumeUpload(file);
+}
+
+function downloadResume(e) {
+  e.preventDefault();
+  const r = getResume();
+  if (!r) {
+    showToast('⚠ No resume uploaded yet' + (isAdmin ? ' — scroll to About to upload one' : ''));
+    return;
+  }
+  const a = document.createElement('a');
+  a.href = r.base64;
+  a.download = r.name;
+  a.click();
+  showToast('↓ Downloading ' + r.name);
+}
+
+// show admin panel when logged in
+function toggleResumeAdminPanel() {
+  const panel = document.getElementById('resumeAdminPanel');
+  if (panel) panel.style.display = isAdmin ? 'block' : 'none';
+}
+
+// init resume UI
+updateResumeUI();
+
 buildFilters();
 renderProjects();
 </script>
